@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
+</head>
+
+<body>
+    <!--Marvel Cosmic Project-->
+    <div class="MarvelCosmic">
+        <nav>
+            <a href="" id="FavouriteTag">Favourite</a>
+        </nav>
+        <div class="header">
+            <h1>Superhero Hunter</h1>
+            <!--Input Field -->
+            <div class="input-field">
+                <ion-icon name="search-outline"></ion-icon>
+                <input type="text" name="" id="MarvelheroName" placeholder="Enter Super Hero Name">
+                <div id="list"></div>
+            </div>
+        </div>
+    </div>
+    <!--Super Hero skill Box-->
+    <h1 id="SuperHeroName">Hulk</h1>
+    <ion-icon name="heart-outline" id="likeIcon" onclick="Favourite()"></ion-icon>
+    <div class="superHeroDetail">
+        <div class="superHeroImage">
+            <img src="81fZSEre89L.jpg" alt="" id="HeroImage">
+        </div>
+        <!--Skill of the SuperHero-->
+        <div class="Skill">
+            <!--Combate  of the SuperHero-->
+            <div class="SkillBar">Combate <span class="precentage">100%</span>
+                <span id="Combate" class="bar"></span>
+            </div>
+            <!--Durability  of the SuperHero-->
+            <div class="SkillBar">Durability <span class="precentage">100%</span>
+                <span id="Durability" class="bar"></span>
+            </div>
+            <!--Intelligence  of the SuperHero-->
+            <div class="SkillBar">Intelligence <span class="precentage">100%</span>
+                <span id="Intelligence" class="bar"></span>
+            </div>
+            <!--Power  of the SuperHero-->
+            <div class="SkillBar">Power <span class="precentage">100%</span>
+                <span id="Power" class="bar"></span>
+            </div>
+            <!--Speed  of the SuperHero-->
+            <div class="SkillBar">Speed <span class="precentage">100%</span>
+                <span id="Speed" class="bar"></span>
+            </div>
+            <!--Strength  of the SuperHero-->
+            <div class="SkillBar">Strength <span class="precentage">100%</span>
+                <span id="Strength" class="bar"></span>
+            </div>
+        </div>
+    </div>
+
+    <!--Favourites section -->
+    <section id="Favourites">
+        <ion-icon name="close-outline" id="close"></ion-icon>
+        <!--Favourites cards Collection-->
+        <div id="FavouritesCards">
+            <p>No SuperHero..... </p>
+
+        </div>
+    </section>
+    <script src="script.js"></script>
+</body>
+
+</html>
