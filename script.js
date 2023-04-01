@@ -16,8 +16,8 @@ MarvelheroName.addEventListener('keypress', (e) => {
   let value = MarvelheroName.value;
   if (e.key === 'Enter') {
     if (value != '' && value != null) {
-      getValue(MarvelheroName.value);
-      putHeartIcon(MarvelheroName.value);
+      getValue(MarvelheroName.value);//we are fatching the details of given input
+      putHeartIcon(MarvelheroName.value);// 
     } else {
       alert("Enter the correct SuperHero Name");
     }
@@ -26,34 +26,36 @@ MarvelheroName.addEventListener('keypress', (e) => {
 
 //call api of superhero and fetch details of super hero-->
 function getValue(v) {
-  let url11 = `https://www.superheroapi.com/api.php/1364379917742994/search/${v}`;
+  let url11 = `https://www.superheroapi.com/api.php/1364379917742994/search/${v}`;// fetch super hero
   fetch(url11).then((response) => {
     return response.json()
   }).then((data) => {
-    putDetails(data);
+    putDetails(data);// put data on field
   });
-  return true;
 }
 
+
+//in this function, put all details or data in Super Hero skill Box--->
 function putDetails(data) {
-  let results = data.results;
-  HeroImage.src = `${results[0].image.url}`
-  SuperHeroName.innerText = `${results[0].name}`
-  let powerset = results[0].powerstats;
+  let results = data.results;//fetch dataa
+  HeroImage.src = `${results[0].image.url}`// put image  of superhero in src of Image *[HTML line no. 37]*-->
+  SuperHeroName.innerText = `${results[0].name}`// put name of superhero *[HTML line no. 33]*
+  let powerset = results[0].powerstats;// get powerset array. it's contains all skill power of superHero
   let i = 0;
+  //put all skill in each particular skill box--> 
   for (const v in powerset) {
-    if (powerset[v] == "null") {
+    if (powerset[v] == "null") {// power is null. that, put 0%--
       precentage[i].innerHTML = `0%`;
       bar[i].style.width = `0%`;
-    } else {
+    } else {// power have same value that puts value of skill power--
       precentage[i].innerHTML = `${powerset[v]}%`;
       bar[i].style.width = `${powerset[v]}%`;
     }
     ++i;
   }
-  superHeroDetail[0].style.display = "flex";
-  SuperHeroName.style.display = 'block';
-  likeIcon.style.display = "block";
+  superHeroDetail[0].style.display = "flex";// we set display:none, but in this line we set display: flex *[HTML line no. 35]*
+  SuperHeroName.style.display = 'block';//we set display:none, but in this line we set display: flex *[HTML line no. 33]*
+  likeIcon.style.display = "block";//we set display:none, but in this line we set display: flex *[HTML line no. 34]*
 }
 
 // adding suggestion on searching  therefor , all superHero name added in the array-->
@@ -61,27 +63,27 @@ let superHeroName = ["A-Bomb", "Abe Sapien", "Abin Sur", "Abomination", "Abraxas
 
 //add EventListener on keyup--->
 MarvelheroName.addEventListener('keyup', () => {
-  removeAllItem();
+  removeAllItem();// remove all the li
   for (let i of superHeroName) {
     if (i.toLowerCase().startsWith(MarvelheroName.value.toLowerCase()) && MarvelheroName.value != "") {
-      let list = document.createElement('li');
-      list.classList.add('li-style');
+      let list = document.createElement('li');//we are creating list. which character is matching on given input
+      list.classList.add('li-style');// added class in each list 
       list.style.cursor = 'pointer';
-      list.setAttribute('onClick', `displayInput("${i}")`);
+      list.setAttribute('onClick', `displayInput("${i}")`);// set attribute on list
       let word = `<b> ${i} </b>`;
       list.innerHTML = word;
-      document.getElementById('list').appendChild(list);
+      document.getElementById('list').appendChild(list);// we put list in list Tag as child *[HTML Line no. 31]*
     }
   }
 });
-// when click on the superhero name then call function--->
+// when click on the superhero name in the list then call function--->
 function displayInput(v) {
   MarvelheroName.value = v;
   getValue(v);
   removeAllItem();
   putHeartIcon(v);
 }
-//remove superhero list name that name is not matching on given input--->
+//remove all li --->
 function removeAllItem() {
   let list = document.querySelectorAll('.li-style');
   list.forEach((item) => {
@@ -93,7 +95,7 @@ function removeAllItem() {
 
 
 // add or remove to favourites page-->
-let FavouritesArr = [];
+let FavouritesArr = [];// favourite Array contains favourite superHeros
 function Favourite() {
   //replace  icon of heart-outline from filled heart--->
   //we take attribute of heart icon ionic--->
@@ -119,11 +121,15 @@ let Favourites = document.getElementById('Favourites');
 let close = document.getElementById('close');
 let FavouritesCards = document.getElementById('FavouritesCards');
 
-//click on FavouriteTag that show the favourites sections
+//click on FavouriteTag that show the favourites sections-->
 FavouriteTag.addEventListener('click', (e) => {
   e.preventDefault();
-  Favourites.style.right = '0';
-
+  if(FavouritesArr.length==0){// check No favourite superhero that show alert
+    alert('No Favourite SuperHeros');
+    return
+  }
+  Favourites.style.right = '0'
+  
 })
 //click on close icon ionic that close  the favourites sections
 close.addEventListener('click', () => {
@@ -132,21 +138,20 @@ close.addEventListener('click', () => {
 
 //set favourite super Hero--->
 function setFavourite(obj) {
-
   if (!check(obj.name)) {
     FavouritesArr.push(obj); //push obj(have properties-->name,linkimage) in favourite arr
     pushFavouritesHero();// push all favourites superhero in favourites section
   } else {
-    alert('already favourites SuperHero');
+    alert('already favourites SuperHero');// Superhero is already present in array
   }
 
 }
 
-// remove the cards from favourite section on click  ion-icon "close-outline"--->
+// remove the cards from favourite section on click  [ion-icon "close-outline"]--->
 function removeCard(i) {
   let value = FavouritesArr[i].name;
   FavouritesArr.splice(i, 1);
-  pushFavouritesHero();
+  pushFavouritesHero();//after remove card and push all cards 
   likeIcon.setAttribute('name', 'heart-outline');
   likeIcon.style.color = '#fff';
 }
@@ -158,6 +163,8 @@ function showDetails(i) {
 //push all favourites SuperHero in Favourites section--->
 function pushFavouritesHero() {
   FavouritesCards.innerHTML = "";
+  
+  //push all favourite card in the FavouritesCards as child using (appendchild) line no. 174-->
   for (let i = 0; i < FavouritesArr.length; i++) {
     let div = document.createElement('div');
     div.innerHTML = `<div class="FavCard" onClick="showDetails(${i})">
@@ -177,22 +184,24 @@ function pushFavouritesHero() {
 function check(name) {
   for (let i = 0; i < FavouritesArr.length; i++) {
     let temp = FavouritesArr[i];
-    if (temp.name === name) {
-      return true;
+    if (temp.name === name) {//check name(superhero) is present or not-
+      return true;//return true favourite Array contains name
     }
   }
   return false;
 }
 
+//in this function,check if superHero is favourites or not--->
 function putHeartIcon(name) {
   // check if superHero is Favourite that set the favourites icon, otherwise no favourites icon-->
   let v = name.toUpperCase();
   if (!check(v)) {
-    console.log('here checking icons')
+    // not favourite superhero. so, show set attributes of likeicon -
     likeIcon.setAttribute('name', 'heart-outline');
     likeIcon.style.color = '#fff';
   } else {
+    //yes this is favourite. so, show set attributes of likeicon- 
     likeIcon.setAttribute('name', 'heart');
-    likeIcon.style.color = 'red';
+    likeIcon.style.color = 'red';//color red 
   }
 }
