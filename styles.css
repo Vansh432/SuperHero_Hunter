@@ -275,7 +275,7 @@ img {
 /* responsive the website ,using media Query*/
 @media (max-width:700px) {
      .MarvelCosmic  nav{
-        transform: translateX(-4%);
+       right:25px;
     }
     .MarvelCosmic .header input {
         font-size: 3vw;
