@@ -36,10 +36,12 @@ function getValue(v) {
 
 
 //in this function, put all details or data in Super Hero skill Box--->
+let saveName="";// take current superhero name
 function putDetails(data) {
   let results = data.results;//fetch dataa
+  saveName=results[0].name;
   HeroImage.src = `${results[0].image.url}`// put image  of superhero in src of Image *[HTML line no. 37]*-->
-  SuperHeroName.innerText = `${results[0].name}`// put name of superhero *[HTML line no. 33]*
+  SuperHeroName.innerText = `${saveName}`// put name of superhero *[HTML line no. 33]*
   let powerset = results[0].powerstats;// get powerset array. it's contains all skill power of superHero
   let i = 0;
   //put all skill in each particular skill box--> 
@@ -152,13 +154,16 @@ function removeCard(i) {
   let value = FavouritesArr[i].name;
   FavouritesArr.splice(i, 1);
   pushFavouritesHero();//after remove card and push all cards 
-  likeIcon.setAttribute('name', 'heart-outline');
-  likeIcon.style.color = '#fff';
+  if(value.toUpperCase()==saveName.toUpperCase()){
+    likeIcon.setAttribute('name', 'heart-outline');
+    likeIcon.style.color = '#fff';
+  }
 }
 // show the details, when click on the particular card in favourite section--->
 function showDetails(i) {
   let name = FavouritesArr[i].name;
   getValue(name);
+  putHeartIcon(name)
 }
 //push all favourites SuperHero in Favourites section--->
 function pushFavouritesHero() {
@@ -180,6 +185,8 @@ function pushFavouritesHero() {
   }
 }
 
+
+
 // check superhero is present or not present that we want not store duplicate superhero card--->
 function check(name) {
   for (let i = 0; i < FavouritesArr.length; i++) {
@@ -190,6 +197,9 @@ function check(name) {
   }
   return false;
 }
+
+
+
 
 //in this function,check if superHero is favourites or not--->
 function putHeartIcon(name) {
