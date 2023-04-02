@@ -76,7 +76,7 @@ MarvelheroName.addEventListener('keyup', () => {
     }
   }
 });
-// when click on the superhero name in the list then call function--->
+// when click on the superhero name in the list then show superHero name on input Field--->
 function displayInput(v) {
   MarvelheroName.value = v;
   getValue(v);
